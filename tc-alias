@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+echo '$timer = "5";'
+echo '$zero = "1";'
+echo '$hfsc = "0";'
+echo '$unit = "kB";'
+echo '$colors="1";'
+echo
+echo '%names = ('
+
+awk  '
+	{
+		if ( $0 ~ /^192./ )   {
+			split($1,IP,".")
+			print "\x271:"IP[4]"\x27 => ""\x27"$2"\x27,"
+		}
+
+	}
+' /etc/hosts
+echo -e \\x271:255\\x27 =\> \\x27UNKNOWN\\x27,
+echo -e \\x271:1\\x27 =\> \\x27ALL\\x27
+
+echo ');'
+
